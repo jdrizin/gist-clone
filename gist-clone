@@ -7,14 +7,14 @@ import argparse
 import subprocess
 
 # input args: http link, dir name
-parser = argparse.ArgumentParser(description='convert https://gist.github.com/user/someid to git@gist.github.com:someid.git and clone it into a given directory')
+parser = argparse.ArgumentParser(description='convert https://gist.github.com/someid.git to git@gist.github.com:someid.git and clone it into a given directory')
 parser.add_argument("gist", help="https link for the gist")
 parser.add_argument("name", help="directory name to put the gist into")
 args = parser.parse_args()
 
 url = args.gist
 kaboom = url.split('/')
-url = 'git@' + kaboom[2] + ':' + kaboom[4] + '.git'
+url = 'git@gist.github.com:' + kaboom[3] 
 cloneCmd = 'git clone ' + url + ' ' + args.name
 
 subprocess.call(cloneCmd, shell=True)
